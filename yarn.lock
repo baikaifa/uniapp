@@ -2022,6 +2022,13 @@
   resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/@types/estree/-/estree-1.0.5.tgz#a6ce3e556e00fd9895dd872dd172ad0d4bd687f4"
   integrity sha1-ps4+VW4A/ZiV3Yct0XKtDUvWh/Q=
 
+"@types/node@^20.12.5":
+  version "20.12.5"
+  resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/@types/node/-/node-20.12.5.tgz#74c4f31ab17955d0b5808cdc8fd2839526ad00b3"
+  integrity sha1-dMTzGrF5VdC1gIzcj9KDlSatALM=
+  dependencies:
+    undici-types "~5.26.4"
+
 "@vitejs/plugin-legacy@^4.0.3":
   version "4.1.1"
   resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/@vitejs/plugin-legacy/-/plugin-legacy-4.1.1.tgz#27aad7ab082d2d554cf48a8e4f1c0ae9f3eca522"
@@ -2478,7 +2485,7 @@ chalk@^2.4.2:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chokidar@^3.5.3, chokidar@^3.6.0:
+"chokidar@>=3.0.0 <4.0.0", chokidar@^3.5.3, chokidar@^3.6.0:
   version "3.6.0"
   resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/chokidar/-/chokidar-3.6.0.tgz#197c6cc669ef2a8dc5e7b4d97ee4e092c3eb0d5b"
   integrity sha1-GXxsxmnvKo3F57TZfuTgksPrDVs=
@@ -3047,6 +3054,11 @@ ieee754@^1.1.13:
   version "1.2.1"
   resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/ieee754/-/ieee754-1.2.1.tgz#8eb7a10a63fff25d15a57b001586d177d1b0d352"
   integrity sha1-jrehCmP/8l0VpXsAFYbRd9Gw01I=
+
+immutable@^4.0.0:
+  version "4.3.5"
+  resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/immutable/-/immutable-4.3.5.tgz#f8b436e66d59f99760dc577f5c99a4fd2a5cc5a0"
+  integrity sha1-+LQ25m1Z+Zdg3Fd/XJmk/SpcxaA=
 
 inherits@2.0.4:
   version "2.0.4"
@@ -3782,6 +3794,15 @@ safe-buffer@5.2.1:
   resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha1-RPoWGwGHuVSd2Eu5GAL5vYOFzWo=
 
+sass@^1.74.1:
+  version "1.74.1"
+  resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/sass/-/sass-1.74.1.tgz#686fc227d3707dd25cb2925e1db8e4562be29319"
+  integrity sha1-aG/CJ9NwfdJcspJeHbjkVivikxk=
+  dependencies:
+    chokidar ">=3.0.0 <4.0.0"
+    immutable "^4.0.0"
+    source-map-js ">=0.6.2 <2.0.0"
+
 sax@>=0.6.0:
   version "1.3.0"
   resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/sax/-/sax-1.3.0.tgz#a5dbe77db3be05c9d1ee7785dbd3ea9de51593d0"
@@ -3877,7 +3898,7 @@ signal-exit@^3.0.3:
   resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/signal-exit/-/signal-exit-3.0.7.tgz#a9a1767f8af84155114eaabd73f99273c8f59ad9"
   integrity sha1-qaF2f4r4QVURTqq9c/mSc8j1mtk=
 
-source-map-js@^1.0.2, source-map-js@^1.2.0:
+"source-map-js@>=0.6.2 <2.0.0", source-map-js@^1.0.2, source-map-js@^1.2.0:
   version "1.2.0"
   resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/source-map-js/-/source-map-js-1.2.0.tgz#16b809c162517b5b8c3e7dcd315a2a5c2612b2af"
   integrity sha1-FrgJwWJRe1uMPn3NMVoqXCYSsq8=
@@ -3998,6 +4019,11 @@ ufo@^1.3.2:
   version "1.5.3"
   resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/ufo/-/ufo-1.5.3.tgz#3325bd3c977b6c6cd3160bf4ff52989adc9d3344"
   integrity sha1-MyW9PJd7bGzTFgv0/1KYmtydM0Q=
+
+undici-types@~5.26.4:
+  version "5.26.5"
+  resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/undici-types/-/undici-types-5.26.5.tgz#bcd539893d00b56e964fd2657a4866b221a65617"
+  integrity sha1-vNU5iT0AtW6WT9JlekhmsiGmVhc=
 
 unicode-canonical-property-names-ecmascript@^2.0.0:
   version "2.0.0"
