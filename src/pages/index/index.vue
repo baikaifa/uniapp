@@ -144,97 +144,202 @@
         </scroll-view> -->
     <!-- 长列表 -->
     <view class="long-list">
-      <view> 商品 </view>
-      <view> 其他 </view>
+      <view :class="[tabIndex === 0 ? 'active' : '']" @click="handleTab(0)">
+        商品
+      </view>
+      <view :class="[tabIndex === 1 ? 'active' : '']" @click="handleTab(1)">
+        其他
+      </view>
     </view>
-    <view class="lone-list-item">
+    <view
+      :class="[
+        'lone-list-item',
+        tabIndex === 0 ? '' : 'lone-list-item-disable',
+      ]"
+    >
+      <view class="list">
+        <view class="list-card">
+          <image
+            mode="widthFix"
+            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
+          />
+          <view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+          </view>
+        </view>
+        <view class="list-card">
+          <image
+            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
+          />
+          <view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+          </view>
+        </view>
+        <view class="list-card">
+          <image
+            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
+          />
+          <view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+          </view>
+        </view>
+        <view class="list-card">
+          <image
+            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
+          />
+          <view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+          </view>
+        </view>
+        <view class="list-card">
+          <image
+            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
+          />
+          <view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+          </view>
+        </view>
+        <view class="list-card">
+          <image
+            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
+          />
+          <view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+          </view>
+        </view>
+        <view class="list-card">
+          <image
+            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
+          />
+          <view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+          </view>
+        </view>
+        <view class="list-card">
+          <image
+            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
+          />
+          <view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+            <view>商品:电视</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view
+      :class="[
+        'lone-list-item',
+        tabIndex === 1 ? '' : 'lone-list-item-disable',
+      ]"
+    >
       <view class="list-card">
         <image
           src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
         />
-        <view>商品:电视</view>
-        <view>商品:电视</view>
-        <view>商品:电视</view>
+        <view>
+          <view>商品:电视</view>
+          <view>商品:电视</view>
+          <view>商品:电视</view>
+        </view>
       </view>
       <view class="list-card">
         <image
           src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
         />
-        <view>商品:电视</view>
-        <view>商品:电视</view>
-        <view>商品:电视</view>
+        <view>
+          <view>商品:电视</view>
+          <view>商品:电视</view>
+          <view>商品:电视</view>
+        </view>
       </view>
       <view class="list-card">
         <image
           src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
         />
-        <view>商品:电视</view>
-        <view>商品:电视</view>
-        <view>商品:电视</view>
+        <view>
+          <view>商品:电视</view>
+          <view>商品:电视</view>
+          <view>商品:电视</view>
+        </view>
       </view>
       <view class="list-card">
         <image
           src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
         />
-        <view>商品:电视</view>
-        <view>商品:电视</view>
-        <view>商品:电视</view>
+        <view>
+          <view>商品:电视</view>
+          <view>商品:电视</view>
+          <view>商品:电视</view>
+        </view>
       </view>
       <view class="list-card">
         <image
           src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
         />
-        <view>商品:电视</view>
-        <view>商品:电视</view>
-        <view>商品:电视</view>
-      </view>
-      <view class="list-card">
-        <image
-          src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-        />
-        <view>商品:电视</view>
-        <view>商品:电视</view>
-        <view>商品:电视</view>
+        <view>
+          <view>商品:电视</view>
+          <view>商品:电视</view>
+          <view>商品:电视</view>
+        </view>
       </view>
     </view>
   </view>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
+import { onPageScroll } from "@dcloudio/uni-app";
+import { ref, reactive, getCurrentInstance } from "vue";
+// const that = getCurrentInstance();
+// const query = uni.createSelectorQuery().in(that);
 const title = ref("Hello");
 const tabIndex = ref(0);
-const tabbbars = reactive([
-  {
-    name: "推荐",
-  },
-  {
-    name: "关注",
-  },
-  {
-    name: "体育",
-  },
-  {
-    name: "热点",
-  },
-  {
-    name: "财经",
-  },
-  {
-    name: "娱乐",
-  },
-  {
-    name: "娱乐",
-  },
-  {
-    name: "娱乐",
-  },
-  {
-    name: "娱乐",
-  },
-]);
+const scrollTopPage = ref(0);
+const scrollTop1 = ref(0);
+const scrollTop2 = ref(0);
+
 const scrollinto = () => {};
 const toClassifyPage = () => {};
+const handleTab = (num: number) => {
+  tabIndex.value = num;
+  return;
+  scrollInfo(num);
+};
+const scrollInfo = (num: number) => {
+  if (num === 0) {
+    scrollTop1.value = scrollTopPage.value;
+    uni.pageScrollTo({
+      scrollTop: scrollTop2.value,
+      duration: 0,
+    });
+  } else if (num === 1) {
+    scrollTop2.value = scrollTopPage.value;
+    uni.pageScrollTo({
+      scrollTop: scrollTop1.value,
+      duration: 0,
+    });
+  }
+};
+const handleScroll = (e: any) => {
+  console.log(e.detail.scrollTop);
+};
+onPageScroll((e: any) => {
+  scrollTopPage.value = e.scrollTop;
+});
 </script>
 
 <style lang="scss" scoped>

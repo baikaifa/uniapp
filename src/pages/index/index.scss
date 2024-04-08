@@ -84,7 +84,7 @@
   }
   .content-box {
     margin: 20rpx 20rpx 20rpx;
-    height: 200px;
+    min-height: 200px;
     background: #fff;
     border-radius: 10rpx;
     padding: 20rpx;
@@ -131,10 +131,11 @@
                     width: 150rpx;
                     height: 150rpx;
                     border-radius: 20rpx;
+                    margin-bottom: 30rpx;
                 }
                 &>view {
                     text-align: left;
-                    font-size: 30rpx;
+                    font-size: 28rpx;
                     color: rgba(0,0,0,.85);
                 }
             }
@@ -149,7 +150,57 @@
     display: flex;
     align-items: center;
     justify-content:flex-start;
-    .tab {
-
+    &>view {
+        width: 200rpx;
+        padding: 20rpx 0;
+        text-align: center;
+        position: relative;
+    }
+    &>view.active {
+        // color: #EA5B3D;
+    }
+    &>view.active::before {
+        content: '';
+        display: block;
+        width: 50rpx;
+        height: 8rpx;
+        border-radius: 10rpx;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 8rpx;
+        background: #EA5B3D;
+    }
+  }
+  .lone-list-item-disable {
+    display: none;
+  }
+  .lone-list-item {
+    width: 100%;
+    box-sizing: border-box;
+    // display: flex;
+    // align-items: flex-start;
+    // justify-content: space-between;
+    // flex-wrap: wrap;
+    padding: 0 20rpx;
+    column-count: 2;
+    .list-card {
+        break-inside: avoid;
+        margin-bottom: 20rpx;
+        border: 1rpx solid rgba(0,0,0,.05);
+        border-radius: 10rpx;
+        padding-bottom: 10rpx;
+        image {
+            width: 100%;
+            border-top-left-radius: 10rpx;
+            border-top-right-radius: 10rpx;
+            margin-bottom: 10rpx;
+        }
+        &>view {
+            text-align: left;
+            font-size: 28rpx;
+            color: rgba(0,0,0,.85);
+            padding: 0 10rpx;
+        }
     }
   }
