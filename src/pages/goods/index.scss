@@ -1,0 +1,45 @@
+.content {
+    min-height: 100vh;
+    font-size: 30rpx;
+    color: rgba(0,0,0,.85);
+    padding: 40rpx;
+}
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    image {
+        width: 60rpx;
+        height: 60rpx;
+        margin-right: 20rpx;
+    }
+}
+.sub-title {
+    text-align: center;
+    margin: 40rpx 0;
+}
+.goods-info {
+    background: #fff;
+    box-shadow: 4rpx 4rpx 8rpx 8rpx rgba(0, 0, 0, 0.1);
+    border-radius: 10rpx;
+    padding: 40rpx;
+    .goods {
+        padding: 40rpx 0;
+        border-bottom: 1rpx solid #ccc;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        image {
+            width: 200rpx;
+            border-radius: 10rpx;
+        }
+        .info {
+            margin-left: 40rpx;
+            font-size: 25rpx;
+            margin-bottom: 15rpx;
+        }
+    }
+    .goods:last-child {
+        border-bottom: none;
+    }
+}

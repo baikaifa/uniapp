@@ -110,21 +110,21 @@
       <view class="r">
         <view>种类排行</view>
         <view class="top2">
-          <view>
+          <view @click="toProductDetail('123')">
             <image
               src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
             />
             <view>商品:电视</view>
             <view>商品:电视</view>
-            <view>商品:电视</view>
+            <view>商品:点击</view>
           </view>
-          <view>
+          <view @click="toProductDetail('123')">
             <image
               src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
             />
             <view>商品:冰箱</view>
             <view>商品:冰箱</view>
-            <view>商品:冰箱</view>
+            <view>商品:点击</view>
           </view>
         </view>
       </view>
@@ -340,6 +340,11 @@ const handleScroll = (e: any) => {
 onPageScroll((e: any) => {
   scrollTopPage.value = e.scrollTop;
 });
+const toProductDetail = (productId: string) => {
+  uni.navigateTo({
+    url: `/pages/detail/index?productId=${productId}`,
+  });
+};
 </script>
 
 <style lang="scss" scoped>

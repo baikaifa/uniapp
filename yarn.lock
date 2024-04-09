@@ -1401,6 +1401,11 @@
     "@dcloudio/uni-shared" "3.0.0-4000720240327002"
     debug "^4.3.3"
 
+"@dcloudio/uni-ui@^1.5.5":
+  version "1.5.5"
+  resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/@dcloudio/uni-ui/-/uni-ui-1.5.5.tgz#7f33267e216af9d7007b67ab75b900aafc7b37e6"
+  integrity sha1-fzMmfiFq+dcAe2erdbkAqvx7N+Y=
+
 "@dcloudio/vite-plugin-uni@3.0.0-4000720240327002":
   version "3.0.0-4000720240327002"
   resolved "http://mvn.ziroom.com/api/npm/ziroom-npm/@dcloudio/vite-plugin-uni/-/vite-plugin-uni-3.0.0-4000720240327002.tgz#c3eb7d05677a2936ed954d541312f42c6907b7de"

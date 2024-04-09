@@ -24,4 +24,11 @@ wx-swiper .wx-swiper-dot-active {
   height: 8rpx;
   border-radius: 4rpx;
 }
+.uni-popup.bottom {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.2);
+}
 </style>

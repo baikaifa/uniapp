@@ -15,21 +15,23 @@
       :scroll-top="scrollTop"
       @scroll="scroll"
     >
-      <block v-for="(item, index) in card" :key="index">
-        <view class="card">
-          <view class="card-title">{{ item[0].subTitle }}</view>
-          <view class="card-info-box">
-            <block v-for="(itm, idx) in item" :key="'info' + idx">
-              <view class="card-info">
-                <view class="card-item">
-                  <image mode="center" :src="itm.img" />
-                  <view>{{ itm.title }}</view>
+      <view class="r-main">
+        <block v-for="(item, index) in card" :key="index">
+          <view class="card">
+            <view class="card-title">{{ item[0].subTitle }}</view>
+            <view class="card-info-box">
+              <block v-for="(itm, idx) in item" :key="'info' + idx">
+                <view class="card-info">
+                  <view class="card-item">
+                    <image mode="center" :src="itm.img" />
+                    <view>{{ itm.title }}</view>
+                  </view>
                 </view>
-              </view>
-            </block>
+              </block>
+            </view>
           </view>
-        </view>
-      </block>
+        </block>
+      </view>
     </scroll-view>
   </view>
 </template>
@@ -106,7 +108,7 @@ const currentCard = reactive<any[]>([
   },
 ]);
 const card = computed(() => {
-  const temp = [];
+  const temp: any[] = [];
   currentCard.forEach((itm) => {
     const idx = temp.findIndex((item) => item[0].subTitle === itm.subTitle);
     if (idx !== -1) {

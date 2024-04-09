@@ -1,0 +1,133 @@
+.container {
+    position: relative;
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+.avatar {
+    background: #EA5B3D;
+    padding-bottom: 40rpx;
+    width: 100%;
+    height: 300rpx;
+    background: #EA5B3D;
+    border-bottom-left-radius: 100rpx;
+    border-bottom-right-radius: 100rpx;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    font-size: 40rpx;
+    font-weight: bold;
+    padding: 80rpx 80rpx 50rpx;
+    box-sizing: border-box;
+    position: relative;
+    image {
+        width: 100rpx;
+        height: 100rpx;
+        border-radius: 50%;
+        margin-right: 50rpx;
+    }
+}
+.banner {
+    position: absolute;
+    left: 50%;
+    top: 250rpx;
+    transform: translateX(-50%);
+    background: #fff;
+    border-radius: 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding:  40rpx;
+    width: 90%;
+    &>view {
+        text-align: center;
+        position: relative;
+        image {
+            display: block;
+            width: 60rpx;
+            height: 60rpx;
+            border-radius: 20rpx;
+            margin: 0 auto 10rpx;
+        }
+        text {
+            font-size: 25rpx;
+            font-weight: bold;
+        }
+    }
+    &>view:last-child::after {
+        display: none;
+    }
+    &>view::after {
+        content:'';
+        display: block;
+        width: 2rpx;
+        height: 100rpx;
+        background: rgba(0,0,0,.05);
+        position: absolute;
+        right: -40rpx;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+.mine {
+    margin-top: 160rpx;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 40rpx;
+    .card {
+        .title {
+            text-align: left;
+            font-size: 35rpx;
+            color: rgba(0,0,0,.85);
+        }
+        .goods-list {
+            padding: 20rpx;
+            margin: 40rpx 0;
+            background: #fff;
+            border-radius: 10rpx;
+            .more {
+                // width: 100%;
+                // text-align: right;
+                // font-size: 25rpx;
+                // color: #42A5F5;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 25rpx;
+                .l {
+                    display: flex;
+                    align-items: center;
+                    .date {
+                        color: #6D6D6D;
+                    }
+                    .state {
+                        margin-left: 20rpx;
+                        color: #36D4C7;
+                    }
+                    .state.consult {
+                        color: #EA5B3D;
+                    }
+                }
+                .r {
+                    color: #6D6D6D;
+                    image {
+                        display: inline-block;
+                        width: 20rpx;
+                        height: 20rpx;
+                        top: 4rpx;
+                        position: relative;
+                    }
+                }
+            }
+            .goods {
+                margin-top: 20rpx;
+                white-space: nowrap;
+                image {
+                    height: 150rpx;
+                    margin-right: 40rpx;
+                    border-radius: 10rpx;
+                }
+            }
+        }
+    }
+}
