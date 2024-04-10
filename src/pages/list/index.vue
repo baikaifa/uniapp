@@ -22,7 +22,7 @@
             <view class="card-info-box">
               <block v-for="(itm, idx) in item" :key="'info' + idx">
                 <view class="card-info">
-                  <view class="card-item">
+                  <view class="card-item" @click="toProductDetail('123')">
                     <image mode="center" :src="itm.img" />
                     <view>{{ itm.title }}</view>
                   </view>
@@ -128,7 +128,11 @@ const handleTag = (index: number) => {
   scrollTop.value = scrollTopOld.scrollTop;
   nextTick(() => {
     scrollTop.value = 0;
-    console.log("pppppp");
+  });
+};
+const toProductDetail = (productId: string) => {
+  uni.navigateTo({
+    url: `/pages/detail/index?productId=${productId}`,
   });
 };
 </script>

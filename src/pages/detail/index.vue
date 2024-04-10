@@ -94,28 +94,23 @@
         src="../../static/icon/close.png"
       />
       <scroll-view scroll-y="true" class="scroll-submit">
-        <view v-for="(itm, idx) in detailInfo" :key="'td' + idx">
+        <view v-for="(itm, idx) in detailInfo" :key="'td' + idx" class="select">
           <text class="label">{{ itm.title }}：</text>
           <view class="radio-box">
             <block v-for="(item, index) in itm.list" :key="index">
               <view
-                :class="[index === item.selectIndex ? 'selected' : '', 'item']"
+                :class="[index === itm.selectIndex ? 'selected' : '', 'item']"
                 @click="handleSelect(idx, index)"
                 >{{ item.name }}
               </view>
             </block>
           </view>
         </view>
-        <view>
-          <text class="label">尺码：</text>
-        </view>
-        <view>
-          <text class="label">其他多选：</text>
-        </view>
         <view class="num">
           <text class="label">数量：</text>
           <input type="number" v-model="form.num" />
         </view>
+        <view class="empty"></view>
       </scroll-view>
       <view class="shopp-box"><text @click="submit">加入订单</text></view>
     </view>
@@ -135,6 +130,10 @@ const detailInfo = ref([
     list: [
       { name: "红色", value: "1" },
       { name: "绿色", value: "1" },
+      {
+        name: "我是超多文本，我是超多文本，我是超多文本，我是超多文本",
+        value: "1",
+      },
       { name: "蓝色", value: "1" },
     ],
   },
@@ -145,6 +144,28 @@ const detailInfo = ref([
       { name: "1米", value: "1" },
       { name: "2米", value: "1" },
       { name: "3米", value: "1" },
+    ],
+  },
+  {
+    title: "颜色1",
+    selectIndex: 0,
+    list: [
+      { name: "红色", value: "1" },
+      { name: "绿色", value: "1" },
+      {
+        name: "我是超多文本，我是超多文本，我是超多文本，我是超多文本",
+        value: "1",
+      },
+      { name: "蓝色", value: "1" },
+    ],
+  },
+  {
+    title: "容量",
+    selectIndex: 0,
+    list: [
+      { name: "1L", value: "1" },
+      { name: "10L", value: "1" },
+      { name: "11L", value: "1" },
     ],
   },
 ]);

@@ -2,6 +2,7 @@
     min-height: 100vh;
     // padding: 40rpx;
     position: relative;
+    padding-bottom: 150rpx;
 }
 .swiper-box {
     width: 100%;
@@ -130,7 +131,45 @@
         background: #fff;
         height: 700rpx;
         color: rgba(0,0,0,.85);
-        view {
+        view.select:first-child {
+            margin-top: 0;
+        }
+        view.select {
+            padding: 0 40rpx;
+            display: block;
+            margin-top: 40rpx;
+            .radio-box {
+                padding: 0 40rpx;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+                label {
+                    display: flex;
+                    align-items: center;
+                }
+                .item {
+                    font-size: 30rpx;
+                    border: 1rpx solid #ccc;
+                    border-radius: 10rpx;
+                    display: inline-block;
+                    color: rgba(0,0,0,.8);
+                    padding: 4rpx 30rpx;
+                    margin-right: 40rpx;
+                    margin-top: 20rpx;
+                    max-width: 700rpx;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                .item.selected {
+                    color: #FF584D;
+                    border: 1rpx solid #FF584D;
+                }
+            }
+        }
+        view.num {
+            margin-top: 40rpx;
             padding: 0 40rpx;
             display: flex;
             align-items: center;
@@ -142,28 +181,11 @@
                 text-align: center;
                 padding: 0 10rpx;
             }
-            .radio-box {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                label {
-                    display: flex;
-                    align-items: center;
-                }
-                .item {
-                    font-size: 25rpx;
-                    border: 1rpx solid #ccc;
-                    border-radius: 10rpx;
-                    display: inline-block;
-                    color: rgba(0,0,0,.8);
-                    padding: 4rpx 8rpx;
-                    margin-right: 10rpx;
-                    margin-top: 10rpx;
-                }
-                .item.selected {
-                    color: red;
-                }
-            }
+           
+        }
+        view.empty {
+            height: 100rpx;
+            width: 100%;
         }
     }
 }
