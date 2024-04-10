@@ -1,9 +1,7 @@
 <template>
   <view class="content">
     <view class="top-bar">
-      <image
-        src="https://webimg.ziroom.com/13c69df0-a462-4967-8766-324542ff0193.png"
-      />
+      <image src="../../static/icon/logo.png" />
       <view>首页</view>
     </view>
     <view class="swiper-box">
