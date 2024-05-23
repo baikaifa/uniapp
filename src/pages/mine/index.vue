@@ -2,7 +2,7 @@
   <view class="container">
     <view class="avatar">
       <image mode="center" :src="avatarUrl" />
-      <view>登录/注册</view>
+      <view @click="handleLogin">登录/注册</view>
     </view>
     <view class="banner">
       <view>
@@ -153,12 +153,25 @@
 </template>
 <script setup lang="ts">
 import { ref } from "vue";
+import { getUserInfo } from "@/api/index";
 const avatarUrl = ref(
   "https://webimg.ziroom.com/77d7708f-7684-4336-8d49-829417397893.jpg"
 );
 const toDetail = (detailId: string) => {
   uni.navigateTo({
     url: `/pages/goods/index?detailId=${detailId}`,
+  });
+};
+const handleLogin = () => {
+  uni.login({
+    success: async (data) => {
+      const { errMsg, code } = data;
+      const res = await getUserInfo({ code });
+      console.log(res);
+    },
+    fail: (e) => {
+      console.log(e);
+    },
   });
 };
 </script>
