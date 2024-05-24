@@ -7,15 +7,24 @@ let state: any = reactive({
   address: storage.get("address") || "",
 });
 function setUserInfo(userInfo: any) {
-  storage.set("userId", userInfo.userId);
-  storage.set("openId", userInfo.openId);
-  storage.set("phone", userInfo.phone);
-  storage.set("address", userInfo.address);
-  state.userId = userInfo.userId;
-  state.openId = userInfo.openId || "";
-  state.phone = userInfo.phone;
-  state.address = userInfo.address;
+  if (userInfo.userId) {
+    storage.set("userId", userInfo.userId);
+    state.userId = userInfo.userId;
+  }
+  if (userInfo.openid) {
+    storage.set("openId", userInfo.openid);
+    state.openId = userInfo.openid || "";
+  }
+  if (userInfo.phone) {
+    storage.set("phone", userInfo.phone);
+    state.phone = userInfo.phone;
+  }
+  if (userInfo.address) {
+    storage.set("address", userInfo.address);
+    state.address = userInfo.address;
+  }
 }
+
 export const CommonModule = {
   state,
   action: { setUserInfo },

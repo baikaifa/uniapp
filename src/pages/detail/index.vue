@@ -112,52 +112,7 @@ const form = reactive({
 });
 const userId = ref("");
 const productId = ref("");
-const detailInfo = ref<any>([
-  {
-    title: "颜色",
-    selectIndex: 0,
-    list: [
-      { name: "红色", value: "1" },
-      { name: "绿色", value: "1" },
-      {
-        name: "我是超多文本，我是超多文本，我是超多文本，我是超多文本",
-        value: "1",
-      },
-      { name: "蓝色", value: "1" },
-    ],
-  },
-  {
-    title: "尺码",
-    selectIndex: 0,
-    list: [
-      { name: "1米", value: "1" },
-      { name: "2米", value: "1" },
-      { name: "3米", value: "1" },
-    ],
-  },
-  {
-    title: "颜色1",
-    selectIndex: 0,
-    list: [
-      { name: "红色", value: "1" },
-      { name: "绿色", value: "1" },
-      {
-        name: "我是超多文本，我是超多文本，我是超多文本，我是超多文本",
-        value: "1",
-      },
-      { name: "蓝色", value: "1" },
-    ],
-  },
-  {
-    title: "容量",
-    selectIndex: 0,
-    list: [
-      { name: "1L", value: "1" },
-      { name: "10L", value: "1" },
-      { name: "11L", value: "1" },
-    ],
-  },
-]);
+const detailInfo = ref<any>([]);
 onLoad(async (options: any) => {
   productId.value = options.productId;
   // CommonModule.action.setUserInfo({

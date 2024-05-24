@@ -2,7 +2,7 @@
   <view class="container">
     <view class="avatar">
       <image mode="center" :src="avatarUrl" />
-      <view @click="handleLogin">登录/注册</view>
+      <view @click="handleLogin">{{ nickName }}</view>
     </view>
     <view class="banner">
       <view>
@@ -152,22 +152,38 @@
   </view>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { getUserInfo } from "@/api/index";
+import { CommonModule } from "@/store";
 const avatarUrl = ref(
   "https://webimg.ziroom.com/77d7708f-7684-4336-8d49-829417397893.jpg"
 );
+const openId = computed(() => CommonModule.state.openId);
+const phone = computed(() => CommonModule.state.phone);
+const nickName = computed(() => {
+  if (phone.value) {
+    return phone.value;
+  }
+  if (openId.value) {
+    return "去填写信息";
+  }
+  return "登录/注册";
+});
 const toDetail = (detailId: string) => {
   uni.navigateTo({
     url: `/pages/goods/index?detailId=${detailId}`,
   });
 };
 const handleLogin = () => {
+  if (openId.value) return;
   uni.login({
     success: async (data) => {
       const { errMsg, code } = data;
-      const res = await getUserInfo({ code });
+      const res: any = await getUserInfo({ code });
       console.log(res);
+      if (!res.isValid) return;
+      debugger;
+      CommonModule.action.setUserInfo(res.data);
     },
     fail: (e) => {
       console.log(e);
