@@ -1,3 +1,26 @@
-.title {
-    
+.car-box {
+    min-height: 100vh;
+    padding: 40rpx;
+.uni-btn-v button {
+    margin-top: 40rpx;
+    background: #EA5B3D;
+    color: #fff;
+}
+.uni-btn-v button:active {
+    opacity: .7;
+}
+}
+.uni-form-item {
+    padding: 20rpx;
+    border-bottom: 1rpx solid #ccc;
+    .title {
+     font-size: 40rpx;   
+     font-weight: bold;
+     color: rgba(0,0,0,.8);
+    }
+    .uni-input {
+        font-size: 35rpx;
+        margin-top: 20rpx;
+    }
+  
 }

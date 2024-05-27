@@ -42,7 +42,7 @@
     {
       "path": "pages/address/index",
       "style": {
-        "navigationBarTitleText": "地址信息"
+        "navigationBarTitleText": "我的信息"
       }
     }
   ],
@@ -84,5 +84,12 @@
         "text": "我的"
       }
     ]
+  },
+
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    }
   }
 }

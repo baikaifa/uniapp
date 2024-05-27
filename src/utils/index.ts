@@ -45,3 +45,24 @@ export interface StorageType {
 }
 
 export const storage = new Storage<StorageType>();
+
+export const formatDate = (date: string) => {
+  const t = new Date(Number(date));
+  console.error(t);
+  return `${t.getFullYear()}年${t.getMonth() + 1}月${t.getDate()}日`;
+};
+export const formatStatus = (status: 0 | 1 | 2) => {
+  let t = "";
+  switch (status) {
+    case 0:
+      t = "待处理";
+      break;
+    case 1:
+      t = "处理中";
+      break;
+    case 2:
+      t = "已完成";
+      break;
+  }
+  return t;
+};

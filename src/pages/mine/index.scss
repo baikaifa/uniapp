@@ -23,7 +23,7 @@
         width: 100rpx;
         height: 100rpx;
         border-radius: 50%;
-        margin-right: 50rpx;
+        margin-right: 20rpx;
     }
 }
 .banner {
@@ -102,10 +102,13 @@
                     }
                     .state {
                         margin-left: 20rpx;
-                        color: #36D4C7;
+                        color: #EA5B3D;
                     }
                     .state.consult {
-                        color: #EA5B3D;
+                        color:#36D4C7 ;
+                    }
+                    .state.finish {
+                        color: #00B26A;
                     }
                 }
                 .r {
@@ -124,6 +127,7 @@
                 white-space: nowrap;
                 image {
                     height: 150rpx;
+                    width: 150rpx;
                     margin-right: 40rpx;
                     border-radius: 10rpx;
                 }

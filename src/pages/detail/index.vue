@@ -196,7 +196,18 @@ const submit = async () => {
     if (!r.isValid) return;
     r.data[0].list = JSON.parse(r.data[0].list);
     const info = r.data[0];
-    // 可以重复添加同一个商品
+    // 不可以重复添加同一个商品
+    const findIdx = info.list.findIndex(
+      (item) => item.productId === productId.value
+    );
+    if (findIdx !== -1) {
+      uni.showToast({
+        icon: "none",
+        mask: true,
+        title: "当前商品已在购物车中，如需更改请在购物车移除再重新添加",
+      });
+      return;
+    }
     info.list.unshift({
       productId: productId.value,
       config: t,
