@@ -65,3 +65,10 @@ export const getShopId = (data: any) =>
     url: "/shop/findIdInfo",
     data,
   });
+// 发送邮件
+export const sendMail = (data: any) =>
+  request({
+    method: "GET",
+    url: "/mail/send",
+    data,
+  });

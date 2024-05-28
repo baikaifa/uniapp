@@ -1,21 +1,39 @@
 <template>
   <view class="title-box">
-    <text>我的信息</text>
+    <text>订单信息</text>
+
     <view>
       <text>姓名：</text>
-      <text>{{ name }}</text>
+      <input
+        class="uni-input"
+        inputmode="text"
+        maxlength="6"
+        v-model="sname"
+        placeholder="请输入订单联系人姓名"
+      />
     </view>
     <view>
       <text>手机号：</text>
-      <text>{{ phone }}</text>
+      <input
+        class="uni-input"
+        inputmode="text"
+        maxlength="11"
+        v-model="sphone"
+        placeholder="请输入订单联系人手机号"
+      />
     </view>
     <view>
       <text>地址：</text>
-      <text>{{ address }}</text>
+      <input
+        class="uni-input"
+        inputmode="text"
+        v-model="saddress"
+        placeholder="请输入订单联系人地址"
+      />
     </view>
-    <view class="btn">
+    <!-- <view class="btn">
       <button size="mini" @click="handleToAddress">去修改</button>
-    </view>
+    </view> -->
   </view>
   <view class="remake-box" v-if="info && info.list?.length">
     <view class="title">订单备注<text>(可选)</text></view>
@@ -78,12 +96,21 @@
 import { ref, computed } from "vue";
 import { onShow } from "@dcloudio/uni-app";
 import { CommonModule } from "@/store";
-import { findCarInfo, getProductList, addCarInfo, createShop } from "@/api";
+import {
+  findCarInfo,
+  getProductList,
+  addCarInfo,
+  createShop,
+  sendMail,
+} from "@/api";
 const name = computed(() => CommonModule.state.name);
 const phone = computed(() => CommonModule.state.phone);
 const address = computed(() => CommonModule.state.address);
 const info = ref<any>(null);
 const remake = ref<string>("");
+const sname = ref("");
+const sphone = ref("");
+const saddress = ref("");
 onShow(async (options) => {
   await init();
 });
@@ -143,6 +170,38 @@ const handleCarDelItem = async (item: any, idx: number) => {
 };
 const handleCarOk = async () => {
   try {
+    if (!sname.value) {
+      uni.showToast({
+        icon: "none",
+        mask: true,
+        title: `请填写订单姓名`,
+      });
+      return;
+    }
+    if (!sphone.value) {
+      uni.showToast({
+        icon: "none",
+        mask: true,
+        title: `请填写订单手机号`,
+      });
+      return;
+    }
+    if (!/^1[3-9]\d{9}$/.test(sphone.value)) {
+      uni.showToast({
+        icon: "none",
+        mask: true,
+        title: `订单手机号格式有误`,
+      });
+      return;
+    }
+    if (!saddress.value) {
+      uni.showToast({
+        icon: "none",
+        mask: true,
+        title: `请填写订单地址信息`,
+      });
+      return;
+    }
     uni.showLoading({
       title: "请稍后...",
       mask: true,
@@ -153,6 +212,9 @@ const handleCarOk = async () => {
       isDelete: 0,
       products: JSON.stringify(info.value),
       remark: remake.value,
+      sname: sname.value,
+      sphone: sphone.value,
+      saddress: saddress.value,
       date: new Date().getTime() + "",
     });
     if (!r.isValid) return;
@@ -162,7 +224,47 @@ const handleCarOk = async () => {
       list: JSON.stringify([]),
     });
     if (!res.isValid) return;
+
+    // 下单成功后需要邮件推送
+    // to=552019419@qq.com&title=我是标题&htmlContent=<h1>我是内容H1</h1>
+    let html = "";
+    info.value.list.forEach((item) => {
+      let t = "";
+      item.config.forEach((itm) => {
+        t += `
+          <p>${itm.name}：${itm.selectList.join(",")}</p>
+        `;
+      });
+
+      html += `
+        <div>
+            <h3>${item.productInfo.title}</h3>
+            ${t}
+            <p>数量：x${item.num}</p>
+        </div>
+      `;
+    });
+    sendMail({
+      to: "552019419@qq.com",
+      title: "你有一条新的订单",
+      htmlContent: `
+        <h2>下单人信息:</h2>
+        <p>姓名：${name.value}</p>
+        <p>手机号：${phone.value}</p>
+        <p>地址：${address.value}</p>
+        <h2>订单信息:</h2>
+        <p>订单联系人：${sname.value}</p>
+        <p>订单联系手机号：${sphone.value}</p>
+        <p>订单联系地址：${saddress.value}</p>
+        <p>订单备注：${remake.value}</p>
+        <h2>订单商品:</h2>
+        ${html}
+      `,
+    });
     remake.value = "";
+    sname.value = "";
+    sphone.value = "";
+    saddress.value = "";
     info.value = null;
     uni.showToast({
       icon: "none",

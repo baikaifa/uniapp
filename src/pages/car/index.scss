@@ -9,7 +9,17 @@
         margin-bottom: 30rpx;
     }
     &>view {
-        padding-bottom: 20rpx;
+        padding-bottom: 40rpx;
+        display: flex;
+        align-items: center;
+        text {
+            width: 150rpx;
+        }
+        input {
+            padding: 20rpx;
+            flex: 1;
+            border-bottom: 1rpx solid rgba(0,0,0,.2);
+        }
     }
     button {
         // margin-top: 40rpx;
@@ -22,6 +32,7 @@
     }
     .btn {
         text-align: right;
+        display: block;
     }
 }
 .remake-box {

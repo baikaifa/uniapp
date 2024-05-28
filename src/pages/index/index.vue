@@ -13,6 +13,7 @@
         :autoplay="true"
         :interval="5000"
         :duration="500"
+        :disable-touch="true"
       >
         <swiper-item>
           <view class="swiper-item uni-bg-red">
@@ -22,26 +23,11 @@
             />
           </view>
         </swiper-item>
-        <swiper-item>
-          <view class="swiper-item uni-bg-green">
-            <image
-              mode="center"
-              src="https://webimg.ziroom.com/77d7708f-7684-4336-8d49-829417397893.jpg"
-            />
-          </view>
-        </swiper-item>
-        <swiper-item>
-          <view class="swiper-item uni-bg-blue">
-            <image
-              mode="center"
-              src="https://webimg.ziroom.com/77d7708f-7684-4336-8d49-829417397893.jpg"
-            />
-          </view>
-        </swiper-item>
       </swiper>
     </view>
+    <view class="html-content" v-html="'<h1>123</h1>'"></view>
     <!-- icon 入口 -->
-    <view class="cat-item">
+    <!-- <view class="cat-item">
       <view class="item" data-sts="1" @tap="toClassifyPage">
         <image
           src="https://webimg.ziroom.com/99b3f4e3-9267-4c36-b1ac-a2360b7218fe.png"
@@ -66,9 +52,9 @@
         />
         <text>领优惠券</text>
       </view>
-    </view>
+    </view> -->
     <!-- 上新商品展示 -->
-    <view class="content-box">
+    <!-- <view class="content-box">
       <view class="l">
         <view>新品好物</view>
         <swiper
@@ -126,22 +112,9 @@
           </view>
         </view>
       </view>
-    </view>
-    <!-- 案例 -->
-    <!-- <scroll-view scroll-x class="border-bottom scroll-row">
-          <view class="scroll-view-item">
-            <image
-              src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-            />
-          </view>
-          <view class="scroll-view-item">
-            <image
-              src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-            />
-          </view>
-        </scroll-view> -->
+    </view> -->
     <!-- 长列表 -->
-    <view class="long-list">
+    <!-- <view class="long-list">
       <view :class="[tabIndex === 0 ? 'active' : '']" @click="handleTab(0)">
         商品
       </view>
@@ -295,7 +268,7 @@
           <view>商品:电视</view>
         </view>
       </view>
-    </view>
+    </view> -->
   </view>
 </template>
 

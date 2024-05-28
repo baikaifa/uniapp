@@ -1,3 +1,7 @@
+.html-content {
+    // background: #fff;
+    padding: 20rpx;
+}
 .top-bar {
     position: fixed;
     z-index: 999;
@@ -28,7 +32,7 @@
     }
   }
   .content {
-    background: #F5F5F5;
+    background: #fff;
     padding: 160rpx 0 0;
     position: relative;
 }
