@@ -245,7 +245,7 @@ const handleCarOk = async () => {
       `;
     });
     sendMail({
-      to: "552019419@qq.com",
+      to: "552019419@qq.com,362605801@qq.com",
       title: "你有一条新的订单",
       htmlContent: `
         <h2>下单人信息:</h2>
