@@ -48,44 +48,7 @@ const scrollTopOld = reactive({
 });
 const currentTabIndex = ref(0);
 const sortList = ref<any[]>([]);
-const currentCard = ref<any[]>([
-  {
-    img: "https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg",
-    subTitle: "副标题",
-    title: "新风冰箱1",
-    detailId: "123",
-  },
-  {
-    img: "https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg",
-    subTitle: "副标题",
-    title: "新风冰箱2",
-    detailId: "123",
-  },
-  {
-    img: "https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg",
-    subTitle: "副标题",
-    title: "新风冰箱3",
-    detailId: "123",
-  },
-  {
-    img: "https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg",
-    subTitle: "副标题1",
-    title: "1匹挂机1",
-    detailId: "123",
-  },
-  {
-    img: "https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg",
-    subTitle: "副标题1",
-    title: "1匹挂机2",
-    detailId: "123",
-  },
-  {
-    img: "https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg",
-    subTitle: "副标题1",
-    title: "1匹挂机3",
-    detailId: "123",
-  },
-]);
+const currentCard = ref<any[]>([]);
 const card = computed(() => {
   const temp: any[] = [];
   currentCard.value.forEach((itm) => {
@@ -123,6 +86,7 @@ const toProductDetail = (productId: string) => {
 };
 onBeforeMount(async () => {
   await init();
+  if (!sortList.value.length) return;
   await getCurrentProductList();
 });
 const init = async () => {

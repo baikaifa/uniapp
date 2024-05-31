@@ -162,7 +162,6 @@ const submit = async () => {
     });
     const t = [];
     let isF = false;
-    console.error("1111", detailInfo.value);
     // detailInfo.value.config.forEach(item=>{
     //   if()
     // })

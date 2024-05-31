@@ -174,6 +174,7 @@ const nickName = computed(() => {
 });
 const shopList = ref<any>([]);
 onShow(async () => {
+  if (!userId.value) return;
   await init();
 });
 const init = async () => {
@@ -231,6 +232,7 @@ const handleLogin = () => {
   uni.login({
     success: async (data) => {
       const { errMsg, code } = data;
+      debugger;
       const res: any = await getUserInfo({ code });
       console.log(res);
       if (!res.isValid) return;

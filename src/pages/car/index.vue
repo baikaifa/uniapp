@@ -131,7 +131,6 @@ const init = async () => {
       item.productInfo = res.data[0];
     }
     info.value = r.data[0];
-    console.error(info.value.list);
   } finally {
     uni.hideLoading();
   }

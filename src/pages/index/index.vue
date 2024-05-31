@@ -1,5 +1,5 @@
 <template>
-  <view class="content">
+  <view class="content" v-if="homeInfo">
     <view class="top-bar">
       <image src="../../static/icon/logo.png" />
       <view>首页</view>
@@ -13,19 +13,16 @@
         :autoplay="true"
         :interval="5000"
         :duration="500"
-        :disable-touch="true"
+        :disable-touch="homeInfo.imgs.length === 1"
       >
-        <swiper-item>
+        <swiper-item v-for="(item, index) in homeInfo.imgs" :key="index">
           <view class="swiper-item uni-bg-red">
-            <image
-              mode="center"
-              src="https://webimg.ziroom.com/77d7708f-7684-4336-8d49-829417397893.jpg"
-            />
+            <image :src="item.url" />
           </view>
         </swiper-item>
       </swiper>
     </view>
-    <view class="html-content" v-html="'<h1>123</h1>'"></view>
+    <view class="html-content" v-html="homeInfo.html"></view>
     <!-- icon 入口 -->
     <!-- <view class="cat-item">
       <view class="item" data-sts="1" @tap="toClassifyPage">
@@ -275,13 +272,15 @@
 <script setup lang="ts">
 import { onPageScroll } from "@dcloudio/uni-app";
 import { ref, reactive, getCurrentInstance } from "vue";
+import { getHomeList } from "@/api";
+import { onLoad } from "@dcloudio/uni-app";
 // const that = getCurrentInstance();
 // const query = uni.createSelectorQuery().in(that);
-const title = ref("Hello");
 const tabIndex = ref(0);
 const scrollTopPage = ref(0);
 const scrollTop1 = ref(0);
 const scrollTop2 = ref(0);
+const homeInfo = ref<any>(null);
 
 const scrollinto = () => {};
 const toClassifyPage = () => {};
@@ -308,9 +307,26 @@ const scrollInfo = (num: number) => {
 const handleScroll = (e: any) => {
   console.log(e.detail.scrollTop);
 };
+onLoad(async () => {
+  await init();
+});
 onPageScroll((e: any) => {
   scrollTopPage.value = e.scrollTop;
 });
+const init = async () => {
+  try {
+    uni.showLoading({
+      title: "请稍后...",
+      mask: true,
+    });
+    const res: any = await getHomeList({});
+    if (!res.isValid) return;
+    res.data[0].imgs = JSON.parse(res.data[0].imgs);
+    homeInfo.value = res.data[0];
+  } finally {
+    uni.hideLoading();
+  }
+};
 const toProductDetail = (productId: string) => {
   uni.navigateTo({
     url: `/pages/detail/index?productId=${productId}`,

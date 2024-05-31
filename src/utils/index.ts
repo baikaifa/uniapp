@@ -48,7 +48,6 @@ export const storage = new Storage<StorageType>();
 
 export const formatDate = (date: string) => {
   const t = new Date(Number(date));
-  console.error(t);
   return `${t.getFullYear()}年${t.getMonth() + 1}月${t.getDate()}日`;
 };
 export const formatStatus = (status: 0 | 1 | 2) => {

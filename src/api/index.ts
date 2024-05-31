@@ -1,4 +1,11 @@
 import request from "./api";
+// 首页数据
+export const getHomeList = (data: any) =>
+  request({
+    method: "GET",
+    url: "/home/list",
+    data,
+  });
 // 获取用户信息
 export const getUserInfo = (data: any) =>
   request({
