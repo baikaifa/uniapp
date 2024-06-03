@@ -204,6 +204,7 @@ const submit = async () => {
       uni.showToast({
         icon: "none",
         mask: true,
+        duration: 2000,
         title: "当前商品已在购物车中，如需更改请在购物车移除再重新添加",
       });
       return;
@@ -218,13 +219,16 @@ const submit = async () => {
       list: JSON.stringify(info.list),
     });
     if (!res.isValid) return;
+    uni.hideLoading();
     uni.showToast({
       icon: "none",
       mask: true,
       title: "已添加至购物车",
     });
-  } finally {
+  } catch (e) {
     uni.hideLoading();
+  } finally {
+    // uni.hideLoading();
   }
 };
 const handleSelect = (isMultipleidx: boolean, idx: number, index: number) => {
