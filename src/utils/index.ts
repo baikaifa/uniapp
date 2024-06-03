@@ -65,3 +65,9 @@ export const formatStatus = (status: 0 | 1 | 2) => {
   }
   return t;
 };
+
+export const formatHTML = (s: string) => {
+  if (!s) return "";
+  const t = s.replace(/\<img/gi, '<img class="timg" ');
+  return t;
+};

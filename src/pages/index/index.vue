@@ -22,7 +22,7 @@
         </swiper-item>
       </swiper>
     </view>
-    <view class="html-content" v-html="homeInfo.html"></view>
+    <view class="html-content" v-html="formatHTML(homeInfo.html)"></view>
     <!-- icon 入口 -->
     <!-- <view class="cat-item">
       <view class="item" data-sts="1" @tap="toClassifyPage">
@@ -274,6 +274,7 @@ import { onPageScroll } from "@dcloudio/uni-app";
 import { ref, reactive, getCurrentInstance } from "vue";
 import { getHomeList } from "@/api";
 import { onLoad } from "@dcloudio/uni-app";
+import { formatHTML } from "@/utils";
 // const that = getCurrentInstance();
 // const query = uni.createSelectorQuery().in(that);
 const tabIndex = ref(0);

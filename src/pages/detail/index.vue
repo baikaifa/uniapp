@@ -45,7 +45,7 @@
       <!-- 商品简介 配置 -->
       <view class="intro">
         <view class="sub-title">商品介绍：</view>
-        <view v-html="detailInfo.info"></view>
+        <view class="text-info" v-html="formatHTML(detailInfo.info)"></view>
       </view>
       <!-- 加入购物车 -->
       <view class="shopp-box">
@@ -104,6 +104,7 @@ import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 import { ref, reactive } from "vue";
 import { onLoad, onShow } from "@dcloudio/uni-app";
 import { CommonModule } from "@/store";
+import { formatHTML } from "@/utils";
 
 import { getProductList, findCarInfo, addCarInfo } from "@/api";
 const popup: any = ref(null);

@@ -239,6 +239,7 @@ const handleCarOk = async () => {
         <div>
             <h3>${item.productInfo.title}</h3>
             ${t}
+            <p>单价：${item.productInfo.price || 0} 元</p>
             <p>数量：x${item.num}</p>
         </div>
       `;

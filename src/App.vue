@@ -31,4 +31,9 @@ wx-swiper .wx-swiper-dot-active {
   height: 100vh;
   background: rgba(0, 0, 0, 0.2);
 }
+// 针对v-html中的img样式覆盖
+.timg {
+  max-width: 100%;
+  height: auto;
+}
 </style>
