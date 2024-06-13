@@ -122,9 +122,6 @@ const formSubmit = async (e) => {
         CommonModule.action.setUserInfo({ userId: dt.id, ...dt });
       }
     }
-
-    debugger;
-
     uni.hideLoading();
   } catch {
     uni.hideLoading();

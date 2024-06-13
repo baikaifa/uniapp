@@ -235,7 +235,6 @@ const handleLogin = () => {
       const res: any = await getUserInfo({ code });
       console.log(res);
       if (!res.isValid) return;
-      debugger;
       CommonModule.action.setUserInfo({ userId: res.data.id, ...res.data });
     },
     fail: (e) => {
