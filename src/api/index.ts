@@ -6,6 +6,13 @@ export const getHomeList = (data: any) =>
     url: "/home/list",
     data,
   });
+// 通过openid获取用户信息
+export const getUserInfoToOpenId = (data: any) =>
+  request({
+    method: "GET",
+    url: "/user/list",
+    data,
+  });
 // 获取用户信息
 export const getUserInfo = (data: any) =>
   request({

@@ -5,6 +5,6 @@ export function isProduction() {
 }
 const HOST_BASE_URL: any = {
   development: "http://localhost:3000",
-  production: "http://82.157.175.138:3001",
+  production: "https://service.longcheng.live",
 };
 export const BASE_URL = HOST_BASE_URL[env];

@@ -54,7 +54,8 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import { CommonModule } from "@/store";
-import { updateUserInfo } from "@/api";
+import { updateUserInfo, getUserInfoToOpenId } from "@/api";
+const userId = computed(() => CommonModule.state.userId);
 const openId = computed(() => CommonModule.state.openId);
 const phone = computed(() => CommonModule.state.phone);
 const name = computed(() => CommonModule.state.name);
@@ -112,7 +113,20 @@ const formSubmit = async (e) => {
       mask: true,
       title: `保存成功`,
     });
-  } finally {
+    // 如果没有userId 则需要获取
+    if (!userId.value) {
+      const r: any = await getUserInfoToOpenId({ openId: openId.value });
+      if (!r.isValid) return;
+      if (r.data.length) {
+        const dt = r.data[0];
+        CommonModule.action.setUserInfo({ userId: dt.id, ...dt });
+      }
+    }
+
+    debugger;
+
+    uni.hideLoading();
+  } catch {
     uni.hideLoading();
   }
 };

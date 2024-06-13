@@ -232,10 +232,10 @@ const handleLogin = () => {
   uni.login({
     success: async (data) => {
       const { errMsg, code } = data;
-      debugger;
       const res: any = await getUserInfo({ code });
       console.log(res);
       if (!res.isValid) return;
+      debugger;
       CommonModule.action.setUserInfo({ userId: res.data.id, ...res.data });
     },
     fail: (e) => {
