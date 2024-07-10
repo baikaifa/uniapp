@@ -23,7 +23,7 @@
               <block v-for="(itm, idx) in item" :key="'info' + idx">
                 <view class="card-info">
                   <view class="card-item" @click="toProductDetail(itm.id)">
-                    <image mode="center" :src="itm.thum" />
+                    <image :src="itm.thum" />
                     <view>{{ itm.title }}</view>
                   </view>
                 </view>

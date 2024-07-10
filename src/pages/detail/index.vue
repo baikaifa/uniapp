@@ -11,7 +11,7 @@
       >
         <swiper-item v-for="(item, idx) in detailInfo.imgs" :key="idx">
           <view class="swiper-item uni-bg-red">
-            <image mode="center" :src="item.url" />
+            <image :src="item.url" />
           </view>
         </swiper-item>
       </swiper>
@@ -22,7 +22,10 @@
         <view>
           <!-- <view> 售价：<text class="big">待议</text> </view> -->
           <view class="title">{{ detailInfo.showTitle }}</view>
-          <view class="ys">已售：{{ detailInfo.sellNum }}件</view>
+          <view class="ys">
+            <view>已售：{{ detailInfo.sellNum }}件</view>
+            <view>库存：{{ detailInfo.count }}件</view>
+          </view>
         </view>
         <text v-for="(itm, idx) in detailInfo.tags" :key="'tag' + idx">{{
           itm
