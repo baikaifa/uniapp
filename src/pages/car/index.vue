@@ -31,6 +31,16 @@
         placeholder="请输入订单联系人地址"
       />
     </view>
+
+    <checkbox-group @change="handleCheckChange" class="check-box">
+      <label>
+        <checkbox
+          :checked="radioCheck"
+          color="#66BB6A"
+          style="transform: scale(0.7)"
+        />当前订单信息为下单后联系渠道，同意后方可提交订单
+      </label>
+    </checkbox-group>
     <!-- <view class="btn">
       <button size="mini" @click="handleToAddress">去修改</button>
     </view> -->
@@ -65,7 +75,7 @@
             <view class="product-info">
               <view>
                 <text>名称：</text>
-                <text>{{ item.productInfo.title }}</text>
+                <text>{{ item.productInfo?.title || "" }}</text>
               </view>
               <view class="product-select">
                 <text v-for="(itm, index) in item.config" :key="'tm' + index">{{
@@ -73,7 +83,7 @@
                 }}</text>
               </view>
             </view>
-            <image mode="aspectFill" :src="item.productInfo.thum" />
+            <image mode="aspectFill" :src="item.productInfo?.thum || ''" />
             <view>
               <text>数量：</text>
               <text>x{{ item.num }}</text>
@@ -81,9 +91,9 @@
           </view>
           <template v-slot:right>
             <view class="item-del">
-              <button size="mini" @click="handleCarDelItem(item, idx)">
+              <view class="button" @click="handleCarDelItem(item, idx)">
                 删除
-              </button></view
+              </view></view
             >
           </template>
         </uni-swipe-action-item>
@@ -111,9 +121,13 @@ const remake = ref<string>("");
 const sname = ref("");
 const sphone = ref("");
 const saddress = ref("");
+const radioCheck = ref(false);
 onShow(async (options) => {
   await init();
 });
+const handleCheckChange = () => {
+  radioCheck.value = !radioCheck.value;
+};
 const init = async () => {
   try {
     uni.showLoading({
@@ -169,6 +183,14 @@ const handleCarDelItem = async (item: any, idx: number) => {
 };
 const handleCarOk = async () => {
   try {
+    if (!radioCheck.value) {
+      uni.showToast({
+        icon: "none",
+        mask: true,
+        title: `请授权同意您的信息`,
+      });
+      return;
+    }
     if (!sname.value) {
       uni.showToast({
         icon: "none",

@@ -119,11 +119,24 @@
                 display: flex;
                 align-items: center;
                 // flex-direction: column;
-                button {
+                .button {
+                    height: 100%;
+                    width: 150rpx;
+                    border-top-left-radius: 14rpx;
+                    border-bottom-left-radius: 14rpx;
                     background: #EA5B3D;
                     color: #fff;
+                    text-align: center;
+                    line-height: 1;
+                    padding: 86rpx 0;
+                    box-sizing: border-box;
+                    font-weight: bold;
                 }
             }
         }
     }
+}
+.check-box {
+    font-size: 25rpx;
+    color: rgba(0,0,0,.65);
 }
