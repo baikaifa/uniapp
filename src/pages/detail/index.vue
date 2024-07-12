@@ -27,6 +27,7 @@
             <view>库存：{{ detailInfo.count }}件</view>
           </view>
         </view>
+        <view class="tip" v-if="detailInfo.tip">{{ detailInfo.tip }}</view>
         <text v-for="(itm, idx) in detailInfo.tags" :key="'tag' + idx">{{
           itm
         }}</text>

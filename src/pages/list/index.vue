@@ -59,7 +59,11 @@ const card = computed(() => {
       temp.push([itm]);
     }
   });
-  return temp;
+  // 排序
+  temp.forEach((item) => {
+    item = item.sort((a: any, b: any) => a.psort - b.psort);
+  });
+  return temp.sort((a, b) => a[0].sort2sort - b[0].sort2sort);
 });
 watch(
   () => currentTabIndex.value,
@@ -73,7 +77,6 @@ const scroll = (e: any) => {
 };
 const handleTag = (index: number) => {
   currentTabIndex.value = index;
-  currentCard.value = currentCard.value.reverse();
   scrollTop.value = scrollTopOld.scrollTop;
   nextTick(() => {
     scrollTop.value = 0;
@@ -83,6 +86,7 @@ const toProductDetail = (productId: string) => {
   uni.navigateTo({
     url: `/pages/detail/index?productId=${productId}`,
   });
+  0;
 };
 onBeforeMount(async () => {
   await init();
