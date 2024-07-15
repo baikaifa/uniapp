@@ -182,47 +182,47 @@ const handleCarDelItem = async (item: any, idx: number) => {
   }
 };
 const handleCarOk = async () => {
+  if (!radioCheck.value) {
+    uni.showToast({
+      icon: "none",
+      mask: true,
+      title: `请授权同意您的信息`,
+    });
+    return;
+  }
+  if (!sname.value) {
+    uni.showToast({
+      icon: "none",
+      mask: true,
+      title: `请填写订单姓名`,
+    });
+    return;
+  }
+  if (!sphone.value) {
+    uni.showToast({
+      icon: "none",
+      mask: true,
+      title: `请填写订单手机号`,
+    });
+    return;
+  }
+  if (!/^1[3-9]\d{9}$/.test(sphone.value)) {
+    uni.showToast({
+      icon: "none",
+      mask: true,
+      title: `订单手机号格式有误`,
+    });
+    return;
+  }
+  if (!saddress.value) {
+    uni.showToast({
+      icon: "none",
+      mask: true,
+      title: `请填写订单地址信息`,
+    });
+    return;
+  }
   try {
-    if (!radioCheck.value) {
-      uni.showToast({
-        icon: "none",
-        mask: true,
-        title: `请授权同意您的信息`,
-      });
-      return;
-    }
-    if (!sname.value) {
-      uni.showToast({
-        icon: "none",
-        mask: true,
-        title: `请填写订单姓名`,
-      });
-      return;
-    }
-    if (!sphone.value) {
-      uni.showToast({
-        icon: "none",
-        mask: true,
-        title: `请填写订单手机号`,
-      });
-      return;
-    }
-    if (!/^1[3-9]\d{9}$/.test(sphone.value)) {
-      uni.showToast({
-        icon: "none",
-        mask: true,
-        title: `订单手机号格式有误`,
-      });
-      return;
-    }
-    if (!saddress.value) {
-      uni.showToast({
-        icon: "none",
-        mask: true,
-        title: `请填写订单地址信息`,
-      });
-      return;
-    }
     uni.showLoading({
       title: "请稍后...",
       mask: true,
