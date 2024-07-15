@@ -17,19 +17,26 @@
     >
       <view class="r-main" v-if="card.length">
         <block v-for="(item, index) in card" :key="index">
-          <view class="card">
-            <view class="card-title">{{ item[0].sort2Name }}</view>
-            <view class="card-info-box">
-              <block v-for="(itm, idx) in item" :key="'info' + idx">
-                <view class="card-info">
-                  <view class="card-item" @click="toProductDetail(itm.id)">
-                    <image :src="itm.thum" />
-                    <view>{{ itm.title }}</view>
-                  </view>
+          <uni-collapse>
+            <view class="card">
+              <!-- <view class="card-title">{{ item[0].sort2Name }}11</view> -->
+              <uni-collapse-item :title="item[0].sort2Name">
+                <view class="card-info-box">
+                  <block
+                    v-for="(itm, idx) in item"
+                    :key="'info' + idx + '-' + index"
+                  >
+                    <view class="card-info">
+                      <view class="card-item" @click="toProductDetail(itm.id)">
+                        <image :src="itm.thum" />
+                        <view>{{ itm.title }}</view>
+                      </view>
+                    </view>
+                  </block>
                 </view>
-              </block>
+              </uni-collapse-item>
             </view>
-          </view>
+          </uni-collapse>
         </block>
       </view>
       <view class="r-main empty" v-else>
@@ -41,6 +48,8 @@
 
 <script setup lang="ts">
 import { reactive, ref, computed, nextTick, onBeforeMount, watch } from "vue";
+import uniCollapse from "@dcloudio/uni-ui/lib/uni-collapse/uni-collapse.vue";
+import uniCollapseItem from "@dcloudio/uni-ui/lib/uni-collapse-item/uni-collapse-item.vue";
 import { getSortList, getProductList } from "@/api";
 const scrollTop = ref(0);
 const scrollTopOld = reactive({
@@ -107,22 +116,36 @@ const init = async () => {
   }
 };
 const getCurrentProductList = async () => {
-  try {
-    uni.showLoading({
-      title: "请稍后...",
-      mask: true,
-    });
-    const r: any = await getProductList({
-      sort1: sortList.value[currentTabIndex.value].id,
-    });
-    if (!r.isValid) return;
-    currentCard.value = r.data;
-  } finally {
-    uni.hideLoading();
-  }
+  currentCard.value = [];
+  nextTick(async () => {
+    try {
+      uni.showLoading({
+        title: "请稍后...",
+        mask: true,
+      });
+      const r: any = await getProductList({
+        sort1: sortList.value[currentTabIndex.value].id,
+      });
+      if (!r.isValid) return;
+      currentCard.value = r.data;
+    } finally {
+      uni.hideLoading();
+    }
+  });
 };
 </script>
 
 <style scoped lang="scss">
 @use "./index.scss";
+</style>
+<style lang="scss">
+.uni-collapse-item__title-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+.uni-collapse-item__title.uni-collapse-item-border,
+.uni-collapse-item__wrap-content {
+  border-bottom: none !important;
+}
 </style>
