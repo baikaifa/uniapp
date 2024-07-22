@@ -63,6 +63,7 @@
     type="bottom"
     background-color="#fff"
     border-radius="10px 10px 0 0"
+    :animation="false"
     @touchmove.stop.prevent="moveHandle"
   >
     <view class="popup-main">
@@ -102,6 +103,18 @@
       <view class="shopp-box"><text @click="submit">加入订单</text></view>
     </view>
   </uni-popup>
+  <uni-popup ref="popupLogin" type="dialog">
+    <uni-popup-dialog
+      mode="base"
+      title="温馨提示"
+      content="当前还未登录"
+      :duration="2000"
+      confirmText="去登录"
+      cancelText="再看看"
+      @close="close"
+      @confirm="confirm"
+    ></uni-popup-dialog>
+  </uni-popup>
 </template>
 <script setup lang="ts">
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
@@ -112,6 +125,7 @@ import { formatHTML } from "@/utils";
 
 import { getProductList, findCarInfo, addCarInfo } from "@/api";
 const popup: any = ref(null);
+const popupLogin: any = ref(null);
 const form = reactive({
   num: 1,
 });
@@ -148,18 +162,26 @@ const init = async (id: string) => {
   }
 };
 const joinShopp = () => {
+  // 未登录则需要登录
+  if (!CommonModule.state.userId) {
+    popupLogin.value.open();
+    return;
+  }
   popup.value.open("bottom");
+};
+const close = () => {
+  popupLogin.value.close();
+};
+const confirm = () => {
+  uni.switchTab({
+    url: "/pages/mine/index",
+  });
 };
 const moveHandle = () => {};
 const closePopup = () => {
   popup.value.close();
 };
 const submit = async () => {
-  // uni.showToast({
-  //   icon: "none",
-  //   mask: true,
-  //   title: "我要提交啦",
-  // });
   try {
     uni.showLoading({
       title: "请稍后...",
@@ -167,9 +189,6 @@ const submit = async () => {
     });
     const t = [];
     let isF = false;
-    // detailInfo.value.config.forEach(item=>{
-    //   if()
-    // })
     for (let i = 0; i < detailInfo.value.config.length; i++) {
       const c = detailInfo.value.config[i];
       if (!c.selectIndex || c.selectIndex.length === 0) {
@@ -218,6 +237,11 @@ const submit = async () => {
       config: t,
       num: form.num,
     });
+    console.log({
+      userId: CommonModule.state.userId,
+      list: JSON.stringify(info.list),
+    });
+    debugger;
     const res = await addCarInfo({
       userId: CommonModule.state.userId,
       list: JSON.stringify(info.list),
