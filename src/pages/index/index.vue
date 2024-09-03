@@ -1,278 +1,210 @@
 <template>
-  <view class="content" v-if="homeInfo">
+  <view class="content">
     <view class="top-bar">
-      <image src="../../static/icon/logo.png" />
       <view>首页</view>
     </view>
+    <!-- <view class="con-part2-con">
+      :autoplay="true"
+      :interval="3000"
+      :duration="1000"
+      <swiper
+        class="swiper-tall"
+        circular
+        previous-margin="260rpx"
+        current="0"
+        @change="partSwiperChange"
+      >
+        <swiper-item
+          class="con-part2-con-container"
+          v-for="(item, index) in partSwiperChangeList"
+          :key="index"
+        >
+          <view
+            :class="['slide-image', partcurrentIndex === index ? 'active' : '']"
+            :style="{
+              background: 'url(' + item.pic + ') center no-repeat',
+              backgroundSize: '100%',
+            }"
+          >
+            <view class="part2-con-img">
+              <image :src="item.img" class="img"></image>
+            </view>
+            <view class="part2-con-title">{{ item.title }}</view>
+          </view>
+        </swiper-item>
+      </swiper>
+    </view> -->
+
     <view class="swiper-box">
-      <view class="top-bar-sub"> </view>
+      <!-- <view class="top-bar-sub"> </view> -->
       <swiper
         class="swiper"
         circular
-        :indicator-dots="true"
         :autoplay="true"
         :interval="5000"
         :duration="500"
-        :disable-touch="homeInfo.imgs.length === 1"
+        previous-margin="30"
+        next-margin="30"
+        :indicator-dots="true"
+        :disable-touch="list.swiperList.length === 1"
+        @change="partSwiperChange"
       >
-        <swiper-item v-for="(item, index) in homeInfo.imgs" :key="index">
-          <view class="swiper-item uni-bg-red">
-            <image :src="item.url" />
+        <swiper-item
+          :class="['swiper-item', partcurrentIndex === index ? 'active' : '']"
+          v-for="(item, index) in list.swiperList"
+          :key="index"
+          @click="toProductDetail(item.id)"
+        >
+          <view :class="['slide-box']">
+            <view class="slide-image">
+              <image mode="aspectFill" :src="item.thum" />
+            </view>
+            <view class="slide-tip">
+              <view class="s1">{{ item.showTitle }}</view>
+              <view class="s2">{{ item.subTitle }}</view>
+              <view class="s3">
+                {{ `${partcurrentIndex + 1}/${list.swiperList.length}` }}
+              </view>
+            </view>
           </view>
         </swiper-item>
       </swiper>
     </view>
-    <view class="html-content" v-html="formatHTML(homeInfo.html)"></view>
-    <!-- icon 入口 -->
-    <!-- <view class="cat-item">
-      <view class="item" data-sts="1" @tap="toClassifyPage">
+    <!-- icon -->
+    <view class="icon-box">
+      <view class="icon-item">
         <image
-          src="https://webimg.ziroom.com/99b3f4e3-9267-4c36-b1ac-a2360b7218fe.png"
+          class="icon-big"
+          mode="aspectFill"
+          src="../../static/home/f1.png"
         />
-        <text>新品推荐</text>
+        <text>大师作品</text>
       </view>
-      <view class="item" data-sts="1" @tap="toClassifyPage">
+      <view class="icon-item">
         <image
-          src="https://webimg.ziroom.com/99b3f4e3-9267-4c36-b1ac-a2360b7218fe.png"
+          class="icon-big"
+          mode="aspectFill"
+          src="../../static/home/f2.png"
         />
-        <text>限时特惠</text>
+        <text>免费安装</text>
       </view>
-      <view class="item" data-sts="3" @tap="toClassifyPage">
-        <image
-          src="https://webimg.ziroom.com/99b3f4e3-9267-4c36-b1ac-a2360b7218fe.png"
-        />
-        <text>每日疯抢</text>
+      <view class="icon-item">
+        <image mode="aspectFill" src="../../static/home/f3.png" />
+        <text>无忧售后</text>
       </view>
-      <view class="item" @tap="toCouponCenter">
-        <image
-          src="https://webimg.ziroom.com/99b3f4e3-9267-4c36-b1ac-a2360b7218fe.png"
-        />
-        <text>领优惠券</text>
+      <view class="icon-item">
+        <image mode="aspectFill" src="../../static/home/f4.png" />
+        <text>万款产品</text>
       </view>
-    </view> -->
-    <!-- 上新商品展示 -->
-    <!-- <view class="content-box">
-      <view class="l">
-        <view>新品好物</view>
-        <swiper
-          class="swiper"
-          circular
-          :indicator-dots="true"
-          :autoplay="false"
-          :interval="5000"
-          :duration="500"
+    </view>
+    <view class="bg-box">
+      <image mode="widthFix" src="../../static/home/b1.jpg" />
+    </view>
+    <view class="list-box">
+      <view class="list-item item1" @click="toTypeDetail(1)">
+        <view>
+          <text class="t1">客厅</text>
+          <text class="t2">LIVING ROOM</text>
+        </view>
+        <image mode="widthFix" src="../../static/home/i1.png" />
+      </view>
+      <view class="list-item item2" @click="toTypeDetail(2)">
+        <view>
+          <text class="t1">餐厅</text>
+          <text class="t2">RESTAURANT</text>
+        </view>
+        <image mode="widthFix" src="../../static/home/i2.png" />
+      </view>
+      <view class="list-item item3" @click="toTypeDetail(3)">
+        <view>
+          <text class="t1">卧室</text>
+          <text class="t2">BED ROOM</text>
+        </view>
+        <image mode="widthFix" src="../../static/home/i3.png" />
+      </view>
+      <view class="list-item item4" @click="toTypeDetail(4)">
+        <view>
+          <text class="t1">书房</text>
+          <text class="t2">STUDY</text>
+        </view>
+        <image mode="widthFix" src="../../static/home/i4.png" />
+      </view>
+      <view class="list-item item5" @click="toTypeDetail(5)">
+        <view>
+          <text class="t1">茶室</text>
+          <text class="t2">TEA ROOM</text>
+        </view>
+        <image mode="widthFix" src="../../static/home/i5.png" />
+      </view>
+      <view class="list-item item6" @click="toTypeDetail(6)">
+        <view>
+          <text class="t1">全部</text>
+          <text class="t2">WHOLE</text>
+        </view>
+        <image mode="widthFix" src="../../static/home/i6.png" />
+      </view>
+    </view>
+    <view class="bg-box">
+      <image mode="widthFix" src="../../static/home/b2.png" />
+    </view>
+    <!-- 现货特价 -->
+    <view class="product-list">
+      <view>
+        <view class="title">现货特价</view>
+        <view class="sub_title">限时打折新品，过时恢复原价</view>
+      </view>
+      <scroll-view class="product-swiper" scroll-x="true" scroll-left="-40">
+        <view
+          :class="['swiper-item']"
+          v-for="(item, index) in list.CheapPriceList"
+          :key="index"
+          @click="toProductDetail(item.id)"
         >
-          <swiper-item>
-            <view class="swiper-item uni-bg-red">
-              <image
-                mode="center"
-                src="https://webimg.ziroom.com/77d7708f-7684-4336-8d49-829417397893.jpg"
-              />
+          <view :class="['slide-box']">
+            <view class="slide-image">
+              <image :src="item.thum" />
             </view>
-          </swiper-item>
-          <swiper-item>
-            <view class="swiper-item uni-bg-green">
-              <image
-                mode="center"
-                src="https://webimg.ziroom.com/77d7708f-7684-4336-8d49-829417397893.jpg"
-              />
+            <view class="slide-tip">
+              <view class="s1">{{ item.showTitle }}</view>
+              <view class="s2">￥{{ item.price }}</view>
             </view>
-          </swiper-item>
-          <swiper-item>
-            <view class="swiper-item uni-bg-blue">
-              <image
-                mode="center"
-                src="https://webimg.ziroom.com/77d7708f-7684-4336-8d49-829417397893.jpg"
-              />
-            </view>
-          </swiper-item>
-        </swiper>
-      </view>
-      <view class="r">
-        <view>种类排行</view>
-        <view class="top2">
-          <view @click="toProductDetail('123')">
-            <image
-              src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-            />
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-            <view>商品:点击</view>
-          </view>
-          <view @click="toProductDetail('123')">
-            <image
-              src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-            />
-            <view>商品:冰箱</view>
-            <view>商品:冰箱</view>
-            <view>商品:点击</view>
           </view>
         </view>
-      </view>
-    </view> -->
-    <!-- 长列表 -->
-    <!-- <view class="long-list">
-      <view :class="[tabIndex === 0 ? 'active' : '']" @click="handleTab(0)">
-        商品
-      </view>
-      <view :class="[tabIndex === 1 ? 'active' : '']" @click="handleTab(1)">
-        其他
-      </view>
+      </scroll-view>
     </view>
-    <view
-      :class="[
-        'lone-list-item',
-        tabIndex === 0 ? '' : 'lone-list-item-disable',
-      ]"
-    >
-      <view class="list">
-        <view class="list-card">
-          <image
-            mode="widthFix"
-            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-          />
-          <view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-          </view>
-        </view>
-        <view class="list-card">
-          <image
-            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-          />
-          <view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-          </view>
-        </view>
-        <view class="list-card">
-          <image
-            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-          />
-          <view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-          </view>
-        </view>
-        <view class="list-card">
-          <image
-            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-          />
-          <view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-          </view>
-        </view>
-        <view class="list-card">
-          <image
-            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-          />
-          <view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-          </view>
-        </view>
-        <view class="list-card">
-          <image
-            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-          />
-          <view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-          </view>
-        </view>
-        <view class="list-card">
-          <image
-            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-          />
-          <view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-          </view>
-        </view>
-        <view class="list-card">
-          <image
-            src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-          />
-          <view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-            <view>商品:电视</view>
-          </view>
-        </view>
+    <!-- 新品专区 -->
+    <view class="product-list last">
+      <view>
+        <view class="title">新品专区</view>
+        <view class="sub_title">每周新品推荐</view>
       </view>
+      <scroll-view class="product-swiper" scroll-x="true" scroll-left="-40">
+        <view
+          :class="['swiper-item']"
+          v-for="(item, index) in list.newProductList"
+          :key="index"
+          @click="toProductDetail(item.id)"
+        >
+          <view :class="['slide-box']">
+            <view class="slide-image">
+              <image :src="item.thum" />
+            </view>
+            <view class="slide-tip">
+              <view class="s1">{{ item.showTitle }}</view>
+              <view class="s2">{{ item.subTitle }}</view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
     </view>
-    <view
-      :class="[
-        'lone-list-item',
-        tabIndex === 1 ? '' : 'lone-list-item-disable',
-      ]"
-    >
-      <view class="list-card">
-        <image
-          src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-        />
-        <view>
-          <view>商品:电视</view>
-          <view>商品:电视</view>
-          <view>商品:电视</view>
-        </view>
-      </view>
-      <view class="list-card">
-        <image
-          src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-        />
-        <view>
-          <view>商品:电视</view>
-          <view>商品:电视</view>
-          <view>商品:电视</view>
-        </view>
-      </view>
-      <view class="list-card">
-        <image
-          src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-        />
-        <view>
-          <view>商品:电视</view>
-          <view>商品:电视</view>
-          <view>商品:电视</view>
-        </view>
-      </view>
-      <view class="list-card">
-        <image
-          src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-        />
-        <view>
-          <view>商品:电视</view>
-          <view>商品:电视</view>
-          <view>商品:电视</view>
-        </view>
-      </view>
-      <view class="list-card">
-        <image
-          src="https://webimg.ziroom.com/9a2b9afa-e4a8-4516-9f0e-95a3e55071cb.jpg"
-        />
-        <view>
-          <view>商品:电视</view>
-          <view>商品:电视</view>
-          <view>商品:电视</view>
-        </view>
-      </view>
-    </view> -->
+    <!-- <view class="html-content" v-html="formatHTML(homeInfo.html)"></view> -->
   </view>
 </template>
 
 <script setup lang="ts">
 import { onPageScroll } from "@dcloudio/uni-app";
 import { ref, reactive, getCurrentInstance } from "vue";
-import { getHomeList } from "@/api";
+import { getHomeList, getProductList } from "@/api";
 import { onLoad } from "@dcloudio/uni-app";
 import { formatHTML } from "@/utils";
 // const that = getCurrentInstance();
@@ -282,6 +214,13 @@ const scrollTopPage = ref(0);
 const scrollTop1 = ref(0);
 const scrollTop2 = ref(0);
 const homeInfo = ref<any>(null);
+// new
+const list = reactive<any>({
+  swiperList: [],
+  CheapPriceList: [],
+  newProductList: [],
+});
+const partcurrentIndex = ref(0);
 
 const scrollinto = () => {};
 const toClassifyPage = () => {};
@@ -308,30 +247,89 @@ const scrollInfo = (num: number) => {
 const handleScroll = (e: any) => {
   console.log(e.detail.scrollTop);
 };
-onLoad(async () => {
+onLoad(async (options: any) => {
   await init();
 });
 onPageScroll((e: any) => {
   scrollTopPage.value = e.scrollTop;
 });
 const init = async () => {
-  try {
-    uni.showLoading({
-      title: "请稍后...",
-      mask: true,
-    });
-    const res: any = await getHomeList({});
-    if (!res.isValid) return;
-    res.data[0].imgs = JSON.parse(res.data[0].imgs);
-    homeInfo.value = res.data[0];
-  } finally {
-    uni.hideLoading();
+  const resList: any = await Promise.all([
+    await getProductList({ isHomeSwiper: 1 }),
+    await getProductList({ isHomeCheap: 1 }),
+    await getProductList({ isHomeNewProduct: 1 }),
+  ]);
+  console.log(resList);
+  if (resList[0].isValid) {
+    list.swiperList = [
+      ...resList[0].data.sort((a, b) => a.homeSwiperNum - b.homeSwiperNum),
+    ];
   }
+  if (resList[1].isValid) {
+    list.CheapPriceList = resList[1].data.sort(
+      (a, b) => a.homeCheapNum - b.homeCheapNum
+    );
+  }
+  if (resList[2].isValid) {
+    list.newProductList = resList[2].data.sort(
+      (a, b) => a.homeNewProductNum - b.homeNewProductNum
+    );
+  }
+  console.log(list);
+};
+const partSwiperChange = (event: any) => {
+  partcurrentIndex.value = event.detail.current;
 };
 const toProductDetail = (productId: string) => {
   uni.navigateTo({
     url: `/pages/detail/index?productId=${productId}`,
   });
+};
+const toTypeDetail = (type: number) => {
+  switch (type) {
+    case 1:
+      // 跳转沙发
+      uni.setStorageSync("listType", 0);
+      uni.switchTab({
+        url: `/pages/list/index`,
+      });
+      break;
+    case 2:
+      // 跳转餐桌
+      uni.setStorageSync("listType", 4);
+      uni.switchTab({
+        url: `/pages/list/index`,
+      });
+      break;
+    case 3:
+      // 跳转床头
+      uni.setStorageSync("listType", 7);
+      uni.switchTab({
+        url: `/pages/list/index`,
+      });
+      break;
+    case 4:
+      // 跳转中岛
+      uni.setStorageSync("listType", 5);
+      uni.switchTab({
+        url: `/pages/list/index`,
+      });
+      break;
+    case 5:
+      // 跳转茶几
+      uni.setStorageSync("listType", 1);
+      uni.switchTab({
+        url: `/pages/list/index`,
+      });
+      break;
+    case 6:
+      // 跳转默认第一项
+      uni.setStorageSync("listType", 0);
+      uni.switchTab({
+        url: `/pages/list/index`,
+      });
+      break;
+  }
 };
 </script>
 

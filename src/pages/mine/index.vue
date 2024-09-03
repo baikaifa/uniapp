@@ -6,28 +6,20 @@
     </view>
     <view class="banner">
       <view>
-        <image
-          src="https://webimg.ziroom.com/99b3f4e3-9267-4c36-b1ac-a2360b7218fe.png"
-        />
-        <text>新品推荐</text>
+        <image src="../../static/home/f1.png" />
+        <text>大师作品</text>
       </view>
       <view>
-        <image
-          src="https://webimg.ziroom.com/99b3f4e3-9267-4c36-b1ac-a2360b7218fe.png"
-        />
-        <text>新品推荐</text>
+        <image src="../../static/home/f2.png" />
+        <text>免费安装</text>
       </view>
       <view>
-        <image
-          src="https://webimg.ziroom.com/99b3f4e3-9267-4c36-b1ac-a2360b7218fe.png"
-        />
-        <text>新品推荐</text>
+        <image src="../../static/home/f3.png" />
+        <text>无忧售后</text>
       </view>
       <view>
-        <image
-          src="https://webimg.ziroom.com/99b3f4e3-9267-4c36-b1ac-a2360b7218fe.png"
-        />
-        <text>新品推荐</text>
+        <image src="../../static/home/f4.png" />
+        <text>万款产品</text>
       </view>
     </view>
     <view class="mine">

@@ -28,7 +28,11 @@
                   >
                     <view class="card-info">
                       <view class="card-item" @click="toProductDetail(itm.id)">
-                        <image :src="itm.thum" />
+                        <image
+                          lazy-load
+                          :lazy-load-margin="0"
+                          :src="itm.thum"
+                        />
                         <view>{{ itm.title }}</view>
                       </view>
                     </view>
@@ -47,10 +51,11 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, computed, nextTick, onBeforeMount, watch } from "vue";
+import { reactive, ref, computed, nextTick, watch } from "vue";
 import uniCollapse from "@dcloudio/uni-ui/lib/uni-collapse/uni-collapse.vue";
 import uniCollapseItem from "@dcloudio/uni-ui/lib/uni-collapse-item/uni-collapse-item.vue";
 import { getSortList, getProductList } from "@/api";
+import { onLoad, onShow } from "@dcloudio/uni-app";
 const scrollTop = ref(0);
 const scrollTopOld = reactive({
   scrollTop: 0,
@@ -97,7 +102,19 @@ const toProductDetail = (productId: string) => {
   });
   0;
 };
-onBeforeMount(async () => {
+onShow(() => {
+  const type = uni.getStorageSync("listType");
+  if (type !== "") {
+    currentTabIndex.value = type;
+    uni.removeStorageSync("listType");
+  }
+});
+onLoad(async (options: any) => {
+  const type = uni.getStorageSync("listType");
+  if (type !== "") {
+    currentTabIndex.value = type;
+    uni.removeStorageSync("listType");
+  }
   await init();
   if (!sortList.value.length) return;
   await getCurrentProductList();
@@ -117,6 +134,7 @@ const init = async () => {
 };
 const getCurrentProductList = async () => {
   currentCard.value = [];
+  if (!sortList.value[currentTabIndex.value]?.id) return;
   nextTick(async () => {
     try {
       uni.showLoading({

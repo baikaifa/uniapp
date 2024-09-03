@@ -1,6 +1,6 @@
 <template>
   <view class="content">
-    <view class="swiper-box">
+    <!-- <view class="swiper-box">
       <swiper
         class="swiper"
         circular
@@ -15,27 +15,28 @@
           </view>
         </swiper-item>
       </swiper>
-    </view>
+    </view> -->
     <view class="info-box">
-      <!-- 商品标签属性 -->
-      <view class="tag">
-        <view>
-          <!-- <view> 售价：<text class="big">待议</text> </view> -->
-          <view class="title">{{ detailInfo.showTitle }}</view>
-          <view class="ys">
-            <view>已售：{{ detailInfo.sellNum }}件</view>
-            <view>库存：{{ detailInfo.count }}件</view>
-          </view>
-        </view>
-        <view class="tip" v-if="detailInfo.tip">{{ detailInfo.tip }}</view>
-        <text v-for="(itm, idx) in detailInfo.tags" :key="'tag' + idx">{{
-          itm
-        }}</text>
-      </view>
       <!-- 商品名称 -->
       <view class="title">
         {{ detailInfo.subTitle }}
       </view>
+      <!-- 商品标签属性 -->
+      <view class="tag">
+        <view>
+          <!-- <view> 售价：<text class="big">待议</text> </view> -->
+          <!-- <view class="title">{{ detailInfo.showTitle }}</view> -->
+          <view class="ys">
+            <!-- <view>已售：{{ detailInfo.sellNum }}件</view> -->
+            <view>库存：{{ detailInfo.count }}件</view>
+          </view>
+          <view class="tip" v-if="detailInfo.tip">{{ detailInfo.tip }}</view>
+        </view>
+        <text v-for="(itm, idx) in detailInfo.tags" :key="'tag' + idx">{{
+          itm
+        }}</text>
+      </view>
+
       <!-- 商品详情 -->
       <!-- <view class="info">
         <view class="sub-title">参数：</view>
@@ -48,9 +49,23 @@
       </view> -->
       <!-- 商品简介 配置 -->
       <view class="intro">
-        <view class="sub-title">商品介绍：</view>
-        <view class="text-info" v-html="formatHTML(detailInfo.info)"></view>
+        <view class="img-box" v-for="(item, idx) in detailInfo.imgs">
+          <image
+            lazy-load
+            :lazy-load-margin="0"
+            :src="item.url"
+            @click="handlePreviewImage(detailInfo.imgs, idx)"
+          />
+        </view>
       </view>
+      <!-- <view class="intro">
+        <view class="sub-title">商品介绍：</view>
+        <view
+          id="textInfo"
+          class="text-info"
+          v-html="formatHTML(detailInfo.info)"
+        ></view>
+      </view> -->
       <!-- 加入购物车 -->
       <view class="shopp-box">
         <text @click="joinShopp">加入订单</text>
@@ -63,10 +78,11 @@
     type="bottom"
     background-color="#fff"
     border-radius="10px 10px 0 0"
-    :animation="false"
+    :animation="true"
+    :duration="2000"
     @touchmove.stop.prevent="moveHandle"
   >
-    <view class="popup-main">
+    <view :class="['popup-main', isHide ? 'hide' : '']">
       <image
         class="close"
         @click="closePopup"
@@ -118,13 +134,14 @@
 </template>
 <script setup lang="ts">
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
-import { ref, reactive } from "vue";
+import { ref, reactive, watch } from "vue";
 import { onLoad, onShow } from "@dcloudio/uni-app";
 import { CommonModule } from "@/store";
 import { formatHTML } from "@/utils";
 
 import { getProductList, findCarInfo, addCarInfo } from "@/api";
 const popup: any = ref(null);
+const isHide: any = ref(false);
 const popupLogin: any = ref(null);
 const form = reactive({
   num: 1,
@@ -142,8 +159,41 @@ onLoad(async (options: any) => {
   // });
   // console.error(CommonModule.state.userId);
   await init(options.productId);
+  setTimeout(() => {
+    initAddEvent();
+  }, 1500);
 });
 onShow(() => {});
+const initAddEvent = () => {
+  uni
+    .createSelectorQuery()
+    .select("#textInfo")
+    .fields({ id: true, rect: true }, () => {})
+    .exec((res: any) => {
+      const parentDom = res[0];
+      console.log(res);
+      if (parentDom && parentDom.childNodes.length > 0) {
+        let p_dom = parentDom.childNodes;
+        p_dom.forEach((item) => {
+          item.childNodes.forEach((item0) => {
+            if (item0.nodeName === "IMG") {
+              item0.addEventListener("click", (e: any) => {
+                console.log(e.target.src);
+                // utils.previewImage(img_list.indexOf(e.target.src), img_list)
+                //     var imgArr = [];
+                // imgArr.push(image);
+                // //预览图片
+                // uni.previewImage({
+                // 	urls: imgArr,
+                // 	current: imgArr[0]
+                // });
+              });
+            }
+          });
+        });
+      }
+    });
+};
 const init = async (id: string) => {
   try {
     uni.showLoading({
@@ -167,6 +217,7 @@ const joinShopp = () => {
     popupLogin.value.open();
     return;
   }
+  isHide.value = false;
   popup.value.open("bottom");
 };
 const close = () => {
@@ -179,6 +230,7 @@ const confirm = () => {
 };
 const moveHandle = () => {};
 const closePopup = () => {
+  isHide.value = true;
   popup.value.close();
 };
 const submit = async () => {
@@ -277,6 +329,14 @@ const handleSelect = (isMultipleidx: boolean, idx: number, index: number) => {
     temp = [index];
   }
   detailInfo.value.config[idx].selectIndex = [...temp];
+};
+const handlePreviewImage = (urlArr: string[], index: number) => {
+  if (!urlArr.length) return;
+  const arr = JSON.parse(JSON.stringify(urlArr)).map((item: any) => item.url);
+  uni.previewImage({
+    urls: arr,
+    current: arr[index],
+  });
 };
 </script>
 <style lang="scss" scoped>

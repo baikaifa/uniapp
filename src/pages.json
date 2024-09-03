@@ -66,14 +66,14 @@
         "text": "首页"
       },
       {
-        "iconPath": "static/images/me.png",
-        "selectedIconPath": "static/images/me-selected.png",
+        "iconPath": "static/images/list.png",
+        "selectedIconPath": "static/images/list-selected.png",
         "pagePath": "pages/list/index",
         "text": "分类"
       },
       {
-        "iconPath": "static/images/me.png",
-        "selectedIconPath": "static/images/me-selected.png",
+        "iconPath": "static/images/car.png",
+        "selectedIconPath": "static/images/car-selected.png",
         "pagePath": "pages/car/index",
         "text": "购物车"
       },

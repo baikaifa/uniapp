@@ -94,6 +94,7 @@
     image {
         width: 100%;
         display: block;
+        border-radius: 8rpx;
     }
 }
 .shopp-box {
@@ -200,4 +201,8 @@
             width: 100%;
         }
     }
+}
+.popup-main.hide {
+    height: 0;
+    transition: all 0.2s ease-in 0s;
 }
