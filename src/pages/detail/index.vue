@@ -51,6 +51,7 @@
       <view class="intro">
         <view class="img-box" v-for="(item, idx) in detailInfo.imgs">
           <image
+            mode="widthFix"
             lazy-load
             :lazy-load-margin="0"
             :src="item.url"
